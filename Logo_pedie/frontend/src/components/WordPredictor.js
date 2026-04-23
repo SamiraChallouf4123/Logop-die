@@ -11,7 +11,6 @@ export const LANGUAGES = [
   { code: 'it', label: 'Italiano', flag: '🇮🇹' },
   { code: 'es', label: 'Español',  flag: '🇪🇸' },
   { code: 'de', label: 'Deutsch',  flag: '🇩🇪' },
-  { code: 'ar', label: 'العربية',  flag: '🇹🇳' },
 ];
 
 // Cache CSV (inchangé)

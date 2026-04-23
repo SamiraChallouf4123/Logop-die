@@ -124,8 +124,11 @@ export default function Navbar({ isLoggedIn, user, onLogin, onSignUp, onLogout }
                 >{l}</Link>
               );
             }
+            
+            const href = l === 'Fonctionnalités' ? '#features' : l === 'Comment ça marche' ? '#how-it-works' : '#';
+            
             return (
-              <a key={l} href="#"
+              <a key={l} href={href}
                 style={{ fontSize: '0.9rem', color: '#444', textDecoration: 'none', fontWeight: 500 }}
                 onMouseOver={(e) => (e.target.style.color = TEAL)}
                 onMouseOut={(e) => (e.target.style.color = '#444')}

@@ -8,7 +8,7 @@ export default function Testimonials() {
       <div style={{ maxWidth: 1100, margin: "0 auto" }}>
         <div style={{ textAlign: "center", marginBottom: "3rem" }}>
           <div style={{ color: CORAL, fontWeight: 700, fontSize: "0.85rem", letterSpacing: 2, textTransform: "uppercase", marginBottom: 10 }}>
-            Edieur
+            Editeur
           </div>
           <h2 style={{ fontFamily: "'Nunito', sans-serif", fontSize: "clamp(1.8rem, 4vw, 2.8rem)", fontWeight: 900, color: DARK }}>
             Ils ont retrouvé confiance

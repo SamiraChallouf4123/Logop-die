@@ -4,7 +4,7 @@ import { AMBER, DARK } from '../../constants/colors';
 
 export default function HowItWorks() {
   return (
-    <section style={{ padding: "4rem 2rem", background: "#fff" }}>
+    <section id="how-it-works" style={{ padding: "4rem 2rem", background: "#fff" }}>
       <div style={{ maxWidth: 1000, margin: "0 auto" }}>
         <div style={{ textAlign: "center", marginBottom: "3rem" }}>
           <div style={{ color: AMBER, fontWeight: 700, fontSize: "0.85rem", letterSpacing: 2, textTransform: "uppercase", marginBottom: 10 }}>

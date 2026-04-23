@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from './Home/Navbar';
 import Hero from './Home/Hero';
+import DemoVideo from './Home/DemoVideo';
 import Stats from './Home/Stats';
 import Features from './Home/Features';
 import HowItWorks from './Home/HowItWorks';
@@ -67,13 +68,14 @@ export default function HomePage() {
         onLogout={handleLogout}
       />
 
-      <Hero />
+      <Hero isLoggedIn={isLoggedIn} onOpenLogin={openLogin} />
+      <DemoVideo />
       <Stats />
       <Features />
       <HowItWorks />
       <Audiences />
       <Testimonials />
-      <CTA />
+      <CTA isLoggedIn={isLoggedIn} onOpenLogin={openLogin} />
       <Footer />
 
       <AuthModal

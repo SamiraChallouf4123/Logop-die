@@ -1,7 +1,10 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { TEAL, DARK } from '../../constants/colors';
 
-export default function CTA() {
+export default function CTA({ isLoggedIn, onOpenLogin }) {
+  const navigate = useNavigate();
+
   return (
     <section style={{ padding: "5rem 2rem" }}>
       <div style={{
@@ -22,20 +25,22 @@ export default function CTA() {
           fontSize: "clamp(1.6rem, 4vw, 2.4rem)", color: "#fff",
           marginBottom: "1rem", lineHeight: 1.3,
         }}>
-          Commencez votre essai gratuit dès aujourd'hui
+          Commencez à utiliser l'éditeur dès aujourd'hui
         </h2>
         <p style={{ color: "rgba(255,255,255,0.7)", fontSize: "1rem", lineHeight: 1.8, marginBottom: "2rem", maxWidth: 500, margin: "0 auto 2rem" }}>
-          Sans carte bancaire. Sans engagement. Accédez à toutes les fonctionnalités pendant 14 jours.
+          Découvrez la puissance de nos outils pensés pour faciliter la lecture et la rédaction au quotidien.
         </p>
         <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
-          <button style={{
+          <button 
+            onClick={() => isLoggedIn ? navigate('/editor') : onOpenLogin()}
+            style={{
             background: `linear-gradient(135deg, ${TEAL}, #0F6E56)`,
             color: "#fff", border: "none",
             padding: "1rem 2.5rem", borderRadius: 50,
             fontFamily: "'Nunito', sans-serif", fontWeight: 800, fontSize: "1.05rem",
             cursor: "pointer", boxShadow: `0 6px 24px ${TEAL}66`,
           }}>
-             Essayer gratuitement
+             Ouvrir l'éditeur
           </button>
           <button style={{
             background: "transparent", color: "#fff",

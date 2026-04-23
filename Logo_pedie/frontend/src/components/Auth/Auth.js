@@ -6,6 +6,7 @@ import { TEAL } from '../../constants/colors';
 
 const Auth = ({ defaultSignUp = false, onClose, onLoginSuccess }) => {
   const [isSignUp, setIsSignUp] = useState(defaultSignUp);
+  const [signUpStep, setSignUpStep] = useState(0); // Track sign-up step
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -60,55 +61,58 @@ const Auth = ({ defaultSignUp = false, onClose, onLoginSuccess }) => {
   return (
     <div style={{
       background: '#fff',
-      borderRadius: 0,
+      borderRadius: 24,
       overflow: 'hidden',
-      boxShadow: '0 24px 64px rgba(15,23,42,0.18)',
-      fontFamily: "'Atkinson Hyperlegible', sans-serif",
+      position: 'relative',
+      boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
+      fontFamily: "'Nunito', sans-serif",
     }}>
-      {/* Accent top bar */}
-      <div style={{ height: 4, background: `linear-gradient(90deg, ${TEAL} 0%, #f59e0b 100%)` }} />
-
-      {/* Logo + Title */}
-      <div style={{ padding: '28px 32px 0', textAlign: 'center' }}>
-        <div style={{
-          width: 48, height: 48, borderRadius: 14, margin: '0 auto 12px',
-          background: `linear-gradient(135deg, ${TEAL}, #0F6E56)`,
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          fontSize: 24, boxShadow: `0 4px 14px ${TEAL}44`,
-        }}>📖</div>
-        <div style={{ fontFamily: "'Nunito', sans-serif", fontWeight: 900, fontSize: 20, color: '#1A1A2E' }}>
-          Logopédie
+      {/* Logo + Title hides on step 2 & 3 */}
+      {(!isSignUp || signUpStep === 0) && (
+        <div style={{ padding: '32px 36px 0', textAlign: 'center' }}>
+          <div style={{
+            width: 48, height: 48, borderRadius: 16, margin: '0 auto 12px',
+            background: `linear-gradient(135deg, ${TEAL}, #0F6E56)`,
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            fontSize: 24, boxShadow: `0 8px 24px ${TEAL}44`,
+          }}>📖</div>
+          <div style={{ fontWeight: 900, fontSize: 22, color: '#0f172a', letterSpacing: '-0.5px' }}>
+            Logopédie
+          </div>
+          <div style={{ fontSize: 13, color: '#64748b', marginTop: 4, fontWeight: 500 }}>
+            {isSignUp ? 'Créez votre compte pour commencer' : 'Content de vous revoir !'}
+          </div>
         </div>
-        <div style={{ fontSize: 13, color: '#94a3b8', marginTop: 2 }}>
-          {isSignUp ? 'Créez votre compte gratuitement' : 'Bon retour parmi nous !'}
-        </div>
-      </div>
+      )}
 
-      {/* Tabs */}
-      <div style={{ display: 'flex', margin: '20px 32px 0', background: '#f1f5f9', borderRadius: 12, padding: 4 }}>
-        {[
-          { label: 'Se connecter', value: false },
-          { label: "S'inscrire",   value: true  },
-        ].map(({ label, value }) => (
-          <button
-            key={label}
-            onClick={() => { setIsSignUp(value); setError(''); }}
-            style={{
-              flex: 1, padding: '10px 0', border: 'none', cursor: 'pointer',
-              borderRadius: 9, fontSize: 14, fontWeight: 700,
-              fontFamily: "'Nunito', sans-serif",
-              background: isSignUp === value ? '#fff' : 'transparent',
-              color:      isSignUp === value ? TEAL   : '#64748b',
-              boxShadow:  isSignUp === value ? '0 2px 8px rgba(0,0,0,0.08)' : 'none',
-            }}
-          >{label}</button>
-        ))}
-      </div>
+      {/* Tabs - Hides on Step 2 and 3 of Sign Up to save space */}
+      {(!isSignUp || signUpStep === 0) && (
+        <div style={{ display: 'flex', margin: '20px 36px 0', background: '#f8fafc', borderRadius: 14, padding: 6, border: '1px solid #f1f5f9' }}>
+          {[
+            { label: 'Se connecter', value: false },
+            { label: "S'inscrire",   value: true  },
+          ].map(({ label, value }) => (
+            <button
+              key={label}
+              onClick={() => { setIsSignUp(value); setError(''); setSignUpStep(0); }}
+              style={{
+                flex: 1, padding: '10px 0', border: 'none', cursor: 'pointer',
+                borderRadius: 10, fontSize: 14, fontWeight: value === isSignUp ? 800 : 700,
+                fontFamily: "'Nunito', sans-serif",
+                background: isSignUp === value ? '#fff' : 'transparent',
+                color:      isSignUp === value ? TEAL   : '#64748b',
+                boxShadow:  isSignUp === value ? '0 4px 12px rgba(0,0,0,0.05)' : 'none',
+                transition: 'all 0.2s',
+              }}
+            >{label}</button>
+          ))}
+        </div>
+      )}
 
       {/* Formulaire */}
-      <div style={{ padding: '24px 32px 32px', height: 360, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+      <div style={{ padding: (!isSignUp || signUpStep === 0) ? '20px 36px 36px' : '28px 36px', minHeight: 360, height: 'auto', display: 'flex', flexDirection: 'column', justifyContent: 'center', transition: 'padding 0.3s' }}>
         {isSignUp
-          ? <SignUp />
+          ? <SignUp onStepChange={setSignUpStep} />
           : <SignIn onSubmit={handleSubmit} loading={loading} error={error} />
         }
       </div>

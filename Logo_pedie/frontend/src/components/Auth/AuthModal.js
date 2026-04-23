@@ -47,7 +47,7 @@ const AuthModal = ({
         <div style={{
           pointerEvents: 'auto',
           width: '100%', 
-          maxWidth: 640,
+          maxWidth: 720,
           animation: 'slideUpModal 0.32s cubic-bezier(0.34,1.56,0.64,1) both',
           position: 'relative',
         }}>
@@ -57,13 +57,13 @@ const AuthModal = ({
             onClick={onClose}
             style={{
               position: 'absolute', 
-              top: -14, 
-              right: -14, 
-              zIndex: 10,
+              top: 16, 
+              right: 16, 
+              zIndex: 999,
               width: 36, 
               height: 36, 
               borderRadius: '50%',
-              background: '#fff', 
+              background: '#f1f5f9', 
               border: 'none', 
               cursor: 'pointer',
               display: 'flex', 
@@ -71,14 +71,15 @@ const AuthModal = ({
               justifyContent: 'center',
               fontSize: 16, 
               color: '#64748b',
-              boxShadow: '0 4px 14px rgba(0,0,0,0.15)',
               transition: 'all 0.2s',
             }}
             onMouseOver={(e) => { 
-              e.currentTarget.style.transform = 'scale(1.12) rotate(90deg)'; 
+              e.currentTarget.style.background = '#e2e8f0';
+              e.currentTarget.style.color = '#0f172a';
             }}
             onMouseOut={(e) => { 
-              e.currentTarget.style.transform = 'scale(1) rotate(0deg)'; 
+              e.currentTarget.style.background = '#f1f5f9';
+              e.currentTarget.style.color = '#64748b';
             }}
           >
             ✕

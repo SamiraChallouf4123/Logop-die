@@ -1,5 +1,6 @@
 // pages/Editor.jsx
 import React, { useState, useRef, useCallback, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import ReactQuill from 'react-quill-new';
 import 'react-quill-new/dist/quill.snow.css';
 import axios from 'axios';
@@ -188,6 +189,7 @@ const DEFAULT_AUDIO = { speed: 1.0, pitch: 1.0, volume: 1.0 };
 
 // ─── Component ────────────────────────────────────────────────────────────────
 export default function Editor() {
+  const navigate = useNavigate();
   const [value, setValue]               = useState('');
   const [plainText, setPlainText]       = useState('');
   const [lastWord, setLastWord]         = useState('');
@@ -195,7 +197,7 @@ export default function Editor() {
   // ── cursorBounds est maintenant en coordonnées PAGE (fixed/viewport)
   const [cursorBounds, setCursorBounds] = useState({ top: 0, left: 0, bottom: 0 });
 
-  const [selectedLang, setSelectedLang] = useState(null);
+  const [selectedLang, setSelectedLang] = useState('fr');
   const [ttsLoading, setTtsLoading]     = useState(false);
   const [ttsError, setTtsError]         = useState('');
   const [audio, setAudio]               = useState(DEFAULT_AUDIO);
@@ -432,6 +434,23 @@ export default function Editor() {
       margin: '0 auto',
       fontFamily: "'Atkinson Hyperlegible', sans-serif",
     }}>
+      
+      {/* ── RETOUR À L'ACCUEIL ────────────────────────── */}
+      <button 
+        onClick={() => navigate('/')}
+        className="fade-in-1"
+        style={{
+          display: 'inline-flex', alignItems: 'center', gap: 6,
+          background: 'transparent', border: 'none', cursor: 'pointer',
+          color: '#64748b', fontSize: 14, fontWeight: 700,
+          fontFamily: "'Nunito', sans-serif",
+          marginBottom: 20, transition: 'color 0.2s',
+        }}
+        onMouseOver={e => e.currentTarget.style.color = TEAL}
+        onMouseOut={e => e.currentTarget.style.color = '#64748b'}
+      >
+        ← Retour à l'accueil
+      </button>
 
       {/* ── HEADER ─────────────────────────────────────── */}
       <div className="fade-in-1" style={{
@@ -458,8 +477,6 @@ export default function Editor() {
         </div>
 
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', alignItems: 'center' }}>
-          <button className={`lang-btn${selectedLang === null ? ' active' : ''}`}
-            onClick={() => setSelectedLang(null)}>🌐 Auto</button>
           {LANGUAGES.map(l => (
             <button key={l.code}
               className={`lang-btn${selectedLang === l.code ? ' active' : ''}`}
